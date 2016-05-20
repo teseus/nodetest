@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
-
 var handlebars = require('express3-handlebars').create({ defaultLayout:'main' });
+var fortune = require('./lib/fortune.js');
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -14,7 +15,7 @@ app.get('/', function(req,res){
 });
 
 app.get('/about', function(req, res){
-	res.render('about');
+	res.render('about',{fortune: fortune.getFortune()});
 });
 
 app.get('404', function(req,res){
